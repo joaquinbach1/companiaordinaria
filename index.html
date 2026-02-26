@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compañía Ordinaria — Teatro que no pide permiso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lime: #b8f052;
+            --lime-dim: #8bc63e;
+            --dark: #1a1a1a;
+            --darker: #111111;
+            --darkest: #0a0a0a;
+            --light: #f0f0e8;
+            --mid: #888;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background: var(--darkest);
+            color: var(--light);
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===================== NAV ===================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0 40px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(184,240,82,0.08);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            height: 60px;
+            background: rgba(10,10,10,0.95);
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.1rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--light);
+            transition: font-size 0.4s ease;
+        }
+
+        .nav-logo em {
+            display: block;
+            font-style: italic;
+            color: var(--lime);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 0.95em;
+        }
+
+        nav.scrolled .nav-logo {
+            font-size: 0.95rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--lime);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--lime);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--light);
+            transition: all 0.3s;
+        }
+
+        /* ===================== HERO ===================== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--darkest);
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slideshow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(to bottom, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.2) 60%, rgba(10,10,10,0.85) 100%);
+        }
+
+        .hero-grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 256px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 1.2s ease both;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0;
+            text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--lime);
+            display: block;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-style: italic;
+            color: rgba(240,240,232,0.7);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--mid);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse 2s ease infinite;
+        }
+
+        .hero-scroll .arrow {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--lime), transparent);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ===================== SECTIONS ===================== */
+        section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--lime);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            color: var(--light);
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--lime);
+        }
+
+        .section-text {
+            max-width: 700px;
+            color: rgba(240,240,232,0.7);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .section-text + .section-text {
+            margin-top: 20px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--lime);
+            margin: 0 auto;
+            opacity: 0.4;
+        }
+
+        /* ===================== COMPAÑÍA ===================== */
+        #compania {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .compania-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-top: 60px;
+        }
+
+        .compania-highlight {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color: var(--light);
+            font-weight: 400;
+            font-style: italic;
+            border-left: 2px solid var(--lime);
+            padding-left: 24px;
+        }
+
+        /* ===================== ESPECTÁCULOS ===================== */
+        #espectaculos {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .shows-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .show-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 4px;
+            background: var(--dark);
+        }
+
+        .show-card-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .show-card:hover .show-card-img {
+            transform: scale(1.05);
+        }
+
+        .show-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 40%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px 32px;
+            transition: all 0.5s ease;
+        }
+
+        .show-card:hover .show-card-overlay {
+            background: linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.3) 100%);
+        }
+
+        .show-card-number {
+            font-size: 11px;
+            color: var(--lime);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .show-card-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .show-card-desc {
+            font-size: 14px;
+            color: rgba(240,240,232,0.5);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .show-card:hover .show-card-desc {
+            max-height: 120px;
+            opacity: 1;
+        }
+
+        /* ===================== HISTORIA ===================== */
+        #historia {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .timeline {
+            margin-top: 60px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--lime), rgba(184,240,82,0.1));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 20px rgba(184,240,82,0.3);
+        }
+
+        .timeline-year {
+            font-size: 12px;
+            color: var(--lime);
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: rgba(240,240,232,0.6);
+            font-size: 15px;
+            max-width: 600px;
+        }
+
+        /* ===================== EQUIPO ===================== */
+        #equipo {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .team-intro {
+            color: rgba(240,240,232,0.7);
+            font-size: 17px;
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+        }
+
+        .team-member {
+            text-align: center;
+            position: relative;
+            cursor: default;
+        }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .team-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark), #222);
+            color: var(--mid);
+            font-size: 32px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            opacity: 0.3;
+        }
+
+        .team-name {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .team-role {
+            font-size: 12px;
+            color: var(--lime-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===================== PRENSA ===================== */
+        #prensa {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .prensa-placeholder {
+            margin-top: 60px;
+            padding: 60px;
+            border: 1px dashed rgba(184,240,82,0.2);
+            border-radius: 4px;
+            text-align: center;
+            color: var(--mid);
+            font-size: 15px;
+        }
+
+        .prensa-placeholder span {
+            color: var(--lime);
+        }
+
+        /* ===================== CONTACTO ===================== */
+        #contacto {
+            text-align: center;
+            padding-bottom: 80px;
+        }
+
+        #contacto .section-text {
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--lime);
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .contact-email::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--lime);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .contact-email:hover::after {
+            transform: scaleX(1);
+        }
+
+        .contact-socials {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .contact-socials a {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .contact-socials a:hover {
+            color: var(--lime);
+        }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            padding: 32px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(240,240,232,0.25);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* ===================== SCROLL ANIMATIONS ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 900px) {
+            section {
+                padding: 80px 24px;
+            }
+
+            .compania-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .shows-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            nav {
+                padding: 0 24px;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10,10,10,0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 32px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .hero-logo {
+                width: 85vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="#hero" class="nav-logo">
+            Compañía<em>Ordinaria</em>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#compania" onclick="closeMenu()">Compañía</a></li>
+            <li><a href="#espectaculos" onclick="closeMenu()">Espectáculos</a></li>
+            <li><a href="#historia" onclick="closeMenu()">Historia</a></li>
+            <li><a href="#equipo" onclick="closeMenu()">Equipo</a></li>
+            <li><a href="#prensa" onclick="closeMenu()">Prensa</a></li>
+            <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-slideshow">
+            <div class="hero-slide active" style="background-image:url('public/images/Hero1.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero2.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero3.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero4.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero5.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero6.jpeg')"></div>
+        </div>
+        <div class="hero-grain"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Compañía <em>Ordinaria</em></h1>
+        </div>
+        <div class="hero-scroll">
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- COMPAÑÍA -->
+    <section id="compania">
+        <div class="reveal">
+            <p class="section-label">Compañía</p>
+            <h2 class="section-title">Somos Compañía <em>Ordinaria.</em></h2>
+        </div>
+        <div class="compania-grid">
+            <div class="reveal">
+                <p class="section-text">Nacimos en 2024 en Punta del Este, Uruguay, con una idea simple: hacer teatro que no entre en ninguna caja.</p>
+                <p class="section-text">Somos una compañía multidisciplinaria que inventó su propio género: el <strong style="color:var(--lime)">anti musical</strong>. Mezclamos teatro y música, pero no esperen coreografías prolijas ni finales felices con confeti. Acá la música choca con el drama, la comedia negra se cuela donde menos la esperás, y lo experimental es la norma.</p>
+                <p class="section-text">Diez personas que se juntaron no para hacer lo correcto, sino para hacer lo que les da la gana. A veces sale algo hermoso. A veces sale un desastre con ritmo. Siempre sale algo que no vieron antes.</p>
+            </div>
+            <div class="reveal">
+                <p class="compania-highlight">"Mezclamos teatro y música, pero no es un musical. Es otra cosa. Es un anti musical."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPECTÁCULOS -->
+    <section id="espectaculos">
+        <div class="reveal">
+            <p class="section-label">Espectáculos</p>
+            <h2 class="section-title">Lo que <em>hacemos.</em></h2>
+        </div>
+        <div class="shows-grid">
+            <div class="show-card reveal">
+                <img src="public/images/lipo_thumbail.jpg" alt="Vida y obra del doctor Lipovetsky" class="show-card-img">
+                <div class="show-card-overlay">
+                    <span class="show-card-number">Obra 01</span>
+                    <h3 class="show-card-title">Vida y obra del doctor Lipovetsky</h3>
+                    <p class="show-card-desc">Sinopsis próximamente. Hacé clic para ver más detalles.</p>
+                </div>
+            </div>
+            <div class="show-card reveal">
+                <img src="public/images/embutidos_thumbail.jpeg" alt="Embutidos Ibargoyen Varela" class="show-card-img">
+                <div class="show-card-overlay">
+                    <span class="show-card-number">Obra 02</span>
+                    <h3 class="show-card-title">Embutidos Ibargoyen Varela</h3>
+                    <p class="show-card-desc">Sinopsis próximamente. Hacé clic para ver más detalles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia">
+        <div class="reveal">
+            <p class="section-label">Historia</p>
+            <h2 class="section-title">De dónde <em>venimos.</em></h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <span class="timeline-year">2024</span>
+                <h3 class="timeline-title">Nace Compañía Ordinaria</h3>
+                <p class="timeline-desc">Diez personas se encuentran en Punta del Este con ganas de hacer teatro distinto. Nace la idea del anti musical y arranca la compañía.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <span class="timeline-year">2024</span>
+                <h3 class="timeline-title">Vida y obra del doctor Lipovetsky</h3>
+                <p class="timeline-desc">Se estrena la primera obra de la compañía. Detalles próximamente.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <span class="timeline-year">2025</span>
+                <h3 class="timeline-title">Embutidos Ibargoyen Varela</h3>
+                <p class="timeline-desc">Llega la segunda producción. Detalles próximamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPO -->
+    <section id="equipo">
+        <div class="reveal">
+            <p class="section-label">Equipo</p>
+            <h2 class="section-title">Somos <em>diez.</em></h2>
+            <p class="team-intro">Ni uno más, ni uno menos. Un ensamble multidisciplinario que hace lo que se le canta.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">SG</div></div>
+                <p class="team-name">Shumi Gauto</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">JB</div></div>
+                <p class="team-name">Joaquín Bachrach</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">CS</div></div>
+                <p class="team-name">Catalina Salas</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">LB</div></div>
+                <p class="team-name">Lucila Brea</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">AK</div></div>
+                <p class="team-name">Allie Kotliar</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">MS</div></div>
+                <p class="team-name">María Solari</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">XP</div></div>
+                <p class="team-name">Ximena Perazzo</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">LT</div></div>
+                <p class="team-name">Lucila Tolcachier</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">PS</div></div>
+                <p class="team-name">Pietro Scalone</p>
+            </div>
+            <div class="team-member reveal">
+                <div class="team-photo"><div class="team-photo-placeholder">MS</div></div>
+                <p class="team-name">Masha Sultanova</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRENSA -->
+    <section id="prensa">
+        <div class="reveal">
+            <p class="section-label">Prensa</p>
+            <h2 class="section-title">Lo que <em>dicen.</em></h2>
+        </div>
+        <div class="prensa-placeholder reveal">
+            <p>Próximamente: notas, entrevistas y reseñas.<br><span>¿Sos periodista? Escribinos.</span></p>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="reveal">
+            <p class="section-label">Contacto</p>
+            <h2 class="section-title">¿Querés hablar<em>?</em></h2>
+            <p class="section-text">Contrataciones, insultos, invitaciones a café. Todo vale.</p>
+            <a href="mailto:contacto@companiaordinaria.com" class="contact-email">contacto@companiaordinaria.com</a>
+            <div class="contact-socials">
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2024 — Compañía Ordinaria. Punta del Este, Uruguay.</p>
+    </footer>
+
+    <script>
+        // Nav scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('open');
+        }
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Hero slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+    </script>
+</body>
+</html>
