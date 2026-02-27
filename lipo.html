@@ -198,17 +198,15 @@
 
         .galeria-item {
             aspect-ratio: 4/3;
-            background: linear-gradient(135deg, var(--dark), #222);
+            background: var(--dark);
             border-radius: 4px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--mid);
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: 1px dashed rgba(184,240,82,0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.02);
         }
 
         .galeria-item img {
@@ -350,12 +348,12 @@
         <p class="obra-section-label">Galería</p>
         <h2 class="obra-section-title">En <em>escena.</em></h2>
         <div class="galeria-grid">
-            <div class="galeria-item">Foto 1</div>
-            <div class="galeria-item">Foto 2</div>
-            <div class="galeria-item">Foto 3</div>
-            <div class="galeria-item">Foto 4</div>
-            <div class="galeria-item">Foto 5</div>
-            <div class="galeria-item">Foto 6</div>
+            <div class="galeria-item"><img src="public/images/lipo1.jpg" alt="Vida y obra del doctor Lipovetsky - Foto 1"></div>
+            <div class="galeria-item"><img src="public/images/lipo2.jpg" alt="Vida y obra del doctor Lipovetsky - Foto 2"></div>
+            <div class="galeria-item"><img src="public/images/lipo3.jpg" alt="Vida y obra del doctor Lipovetsky - Foto 3"></div>
+            <div class="galeria-item"><img src="public/images/lipo4.jpeg" alt="Vida y obra del doctor Lipovetsky - Foto 4"></div>
+            <div class="galeria-item"><img src="public/images/lipo5.jpeg" alt="Vida y obra del doctor Lipovetsky - Foto 5"></div>
+            <div class="galeria-item"><img src="public/images/lipo6.jpeg" alt="Vida y obra del doctor Lipovetsky - Foto 6"></div>
         </div>
     </section>
 
