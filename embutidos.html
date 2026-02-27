@@ -277,6 +277,40 @@
             color: var(--darkest);
         }
 
+        /* ===================== DOSSIER ===================== */
+        .dossier-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 32px;
+            padding: 14px 32px;
+            border: 1px solid var(--lime);
+            color: var(--lime);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .dossier-btn:hover {
+            background: var(--lime);
+            color: var(--darkest);
+        }
+
+        .dossier-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            transition: transform 0.3s;
+        }
+
+        .dossier-btn:hover svg {
+            transform: translateY(2px);
+        }
+
         /* ===================== FOOTER ===================== */
         footer {
             padding: 32px 40px;
@@ -339,8 +373,12 @@
     <section class="obra-section reveal">
         <p class="obra-section-label">Sinopsis</p>
         <h2 class="obra-section-title">De qué <em>va.</em></h2>
-        <p class="obra-text">Próximamente: sinopsis de la obra.</p>
-        <p class="obra-text">Acá va la descripción completa de "Embutidos Ibargoyen Varela". Podés reemplazar este texto con la sinopsis real cuando la tengas.</p>
+        <p class="obra-text">A comienzos del siglo XX, en un pueblo rural de Uruguay, las Ibargoyen Varela, cinco mujeres dedicadas a la producción de embutidos, ven tambalear su mundo cuando un virus acaba con sus chanchos. La llegada inesperada de un viajante enciende ilusiones, tensiones y secretos, revelando los deseos y miedos de una época.</p>
+        <p class="obra-text">Un banquete teatral donde lo grotesco y lo entrañable conviven para preguntarnos: ¿Qué herencia queremos recibir y cuál estamos condenados a repetir?</p>
+        <a href="public/files/dossier_embutidos.pdf" target="_blank" class="dossier-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>
+            Descargar Dossier
+        </a>
     </section>
 
     <!-- GALERÍA -->
@@ -348,12 +386,12 @@
         <p class="obra-section-label">Galería</p>
         <h2 class="obra-section-title">En <em>escena.</em></h2>
         <div class="galeria-grid">
-            <div class="galeria-item">Foto 1</div>
-            <div class="galeria-item">Foto 2</div>
-            <div class="galeria-item">Foto 3</div>
-            <div class="galeria-item">Foto 4</div>
-            <div class="galeria-item">Foto 5</div>
-            <div class="galeria-item">Foto 6</div>
+            <div class="galeria-item"><img src="public/images/1emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 1"></div>
+            <div class="galeria-item"><img src="public/images/2emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 2"></div>
+            <div class="galeria-item"><img src="public/images/3emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 3"></div>
+            <div class="galeria-item"><img src="public/images/4emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 4"></div>
+            <div class="galeria-item"><img src="public/images/5emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 5"></div>
+            <div class="galeria-item"><img src="public/images/6emb.jpeg" alt="Embutidos Ibargoyen Varela - Foto 6"></div>
         </div>
     </section>
 
@@ -363,28 +401,36 @@
         <h2 class="obra-section-title">Quién hizo <em>qué.</em></h2>
         <div class="ficha-grid">
             <div class="ficha-item">
-                <p class="ficha-role">Dirección</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-role">Libro y Dirección</p>
+                <p class="ficha-name">Shumi Gauto</p>
             </div>
             <div class="ficha-item">
                 <p class="ficha-role">Elenco</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-name">Catalina Salas, Shumi Gauto, María Solari, Ximena Perazzo, Lucila Brea, Pietro Scalone</p>
             </div>
             <div class="ficha-item">
-                <p class="ficha-role">Música</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-role">Música original</p>
+                <p class="ficha-name">Joaquín Bachrach</p>
             </div>
             <div class="ficha-item">
-                <p class="ficha-role">Vestuario</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-role">Música en vivo</p>
+                <p class="ficha-name">Joaquín Bachrach</p>
             </div>
             <div class="ficha-item">
-                <p class="ficha-role">Iluminación</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-role">Arte y Vestuario</p>
+                <p class="ficha-name">Maru Di Fonzo</p>
             </div>
             <div class="ficha-item">
-                <p class="ficha-role">Escenografía</p>
-                <p class="ficha-name">Próximamente</p>
+                <p class="ficha-role">Luces</p>
+                <p class="ficha-name">Emilio Pistone</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Maquillaje</p>
+                <p class="ficha-name">María Solari</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Producción</p>
+                <p class="ficha-name">Compañía Ordinaria</p>
             </div>
         </div>
     </section>

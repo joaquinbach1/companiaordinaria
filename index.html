@@ -177,7 +177,7 @@
             inset: 0;
             z-index: 1;
             background:
-                linear-gradient(to bottom, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.2) 60%, rgba(10,10,10,0.85) 100%);
+                linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.0) 30%, rgba(10,10,10,0.05) 60%, rgba(10,10,10,0.8) 100%);
         }
 
         .hero-grain {
@@ -196,6 +196,7 @@
             align-self: flex-start;
             text-align: left;
             margin-left: 60px;
+            margin-top: 80px;
         }
 
         .hero-title {
@@ -560,6 +561,204 @@
             text-transform: uppercase;
         }
 
+        /* ===================== TEAM MODAL ===================== */
+        .team-member {
+            cursor: pointer;
+        }
+
+        .team-member:hover .team-photo {
+            box-shadow: 0 0 0 2px var(--lime);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .team-member:hover .team-name {
+            color: var(--lime);
+            transition: color 0.3s ease;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            border: 1px solid rgba(184, 240, 82, 0.12);
+            border-radius: 8px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            display: flex;
+            gap: 0;
+            transform: translateY(30px) scale(0.97);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-photo-col {
+            width: 240px;
+            min-width: 240px;
+            min-height: 360px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .modal-photo-col img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .modal-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark), #222);
+            color: var(--mid);
+            font-size: 48px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            opacity: 0.3;
+        }
+
+        .modal-info {
+            flex: 1;
+            padding: 40px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .modal-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--light);
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .modal-role {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--lime);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .modal-bio p {
+            color: rgba(240, 240, 232, 0.7);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .modal-bio p + p {
+            margin-top: 14px;
+        }
+
+        .modal-bio strong {
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        .modal-bio em {
+            font-style: italic;
+            color: rgba(240, 240, 232, 0.85);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            color: var(--mid);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(184, 240, 82, 0.15);
+            color: var(--lime);
+        }
+
+        /* Modal scrollbar */
+        .modal-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(184, 240, 82, 0.2);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .modal-content {
+                flex-direction: column;
+                max-height: 90vh;
+            }
+
+            .modal-photo-col {
+                width: 100%;
+                min-width: unset;
+                min-height: unset;
+                height: 240px;
+                flex-shrink: 0;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .modal-info {
+                padding: 28px 24px 32px;
+                overflow-y: auto;
+            }
+
+            .modal-name {
+                font-size: 1.5rem;
+            }
+        }
+
         /* ===================== PRENSA ===================== */
         #prensa {
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -748,12 +947,6 @@
     <section id="hero">
         <div class="hero-slideshow">
             <div class="hero-slide active" style="background-image:url('public/images/Hero1.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero2.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero3.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero4.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero5.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero6.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero7.jpg')"></div>
         </div>
         <div class="hero-grain"></div>
         <div class="hero-content">
@@ -772,12 +965,13 @@
         </div>
         <div class="compania-grid">
             <div class="reveal">
-                <p class="section-text">Nacimos en 2024 en Punta del Este, Uruguay, con una idea simple: hacer teatro que no entre en ninguna caja.</p>
-                <p class="section-text">Somos una compañía multidisciplinaria que inventó su propio género: el <strong style="color:var(--lime)">anti musical</strong>. Mezclamos teatro y música, pero no esperen coreografías prolijas ni finales felices con confeti. Acá la música choca con el drama, la comedia negra se cuela donde menos la esperás, y lo experimental es la norma.</p>
-                <p class="section-text">Diez personas que se juntaron no para hacer lo correcto, sino para hacer lo que les da la gana. A veces sale algo hermoso. A veces sale un desastre con ritmo. Siempre sale algo que no vieron antes.</p>
+                <p class="section-text">Compañía Ordinaria nace en 2024 en Punta del Este, Uruguay, como un espacio de creación escénica independiente.</p>
+                <p class="section-text">Somos una compañía multidisciplinaria que trabaja en la intersección entre teatro, música y otras formas de expresión contemporánea. Nuestro trabajo explora distintos formatos y lenguajes escénicos, entre ellos una línea de investigación que llamamos <strong style="color:var(--lime)">anti-musical</strong>, donde la música y el teatro se relacionan desde un lugar más libre y menos convencional.</p>
+                <p class="section-text">El grupo está formado por diez artistas que se reúnen para desarrollar proyectos originales, atravesados por el humor, la tensión dramática y la experimentación escénica.</p>
+                <p class="section-text">Cada obra es una búsqueda por ampliar las posibilidades del teatro y crear experiencias escénicas singulares.</p>
             </div>
             <div class="reveal">
-                <p class="compania-highlight">"Mezclamos teatro y música, pero no es un musical. Es otra cosa. Es un anti musical."</p>
+                <p class="compania-highlight">"Hacemos el teatro que nos gustaría ver."</p>
             </div>
         </div>
     </section>
@@ -843,48 +1037,61 @@
             <p class="team-intro">Ni uno más, ni uno menos. Un ensamble multidisciplinario que hace lo que se le canta.</p>
         </div>
         <div class="team-grid">
-            <div class="team-member reveal">
-                <div class="team-photo"><div class="team-photo-placeholder">SG</div></div>
+            <div class="team-member reveal" data-member="shumi">
+                <div class="team-photo"><img src="public/images/pic_shumi.png" alt="Shumi Gauto" style="width:100%;height:100%;object-fit:cover;"></div>
                 <p class="team-name">Shumi Gauto</p>
             </div>
-            <div class="team-member reveal">
-                <div class="team-photo"><div class="team-photo-placeholder">JB</div></div>
+            <div class="team-member reveal" data-member="joaquin">
+                <div class="team-photo"><img src="public/images/pic_joaco.jpeg" alt="Joaquín Bachrach" style="width:100%;height:100%;object-fit:cover;object-position:center top;"></div>
                 <p class="team-name">Joaquín Bachrach</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="catalina">
                 <div class="team-photo"><div class="team-photo-placeholder">CS</div></div>
                 <p class="team-name">Catalina Salas</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="lucila_b">
                 <div class="team-photo"><div class="team-photo-placeholder">LB</div></div>
                 <p class="team-name">Lucila Brea</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="allie">
                 <div class="team-photo"><div class="team-photo-placeholder">AK</div></div>
                 <p class="team-name">Allie Kotliar</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="maria">
                 <div class="team-photo"><div class="team-photo-placeholder">MS</div></div>
                 <p class="team-name">María Solari</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="ximena">
                 <div class="team-photo"><div class="team-photo-placeholder">XP</div></div>
                 <p class="team-name">Ximena Perazzo</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="lucila_t">
                 <div class="team-photo"><div class="team-photo-placeholder">LT</div></div>
                 <p class="team-name">Lucila Tolcachier</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="pietro">
                 <div class="team-photo"><div class="team-photo-placeholder">PS</div></div>
                 <p class="team-name">Pietro Scalone</p>
             </div>
-            <div class="team-member reveal">
+            <div class="team-member reveal" data-member="masha">
                 <div class="team-photo"><div class="team-photo-placeholder">MS</div></div>
                 <p class="team-name">Masha Sultanova</p>
             </div>
         </div>
     </section>
+
+    <!-- TEAM MODAL -->
+    <div class="modal-overlay" id="teamModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-photo-col" id="modalPhoto"></div>
+            <div class="modal-info">
+                <h3 class="modal-name" id="modalName"></h3>
+                <p class="modal-role" id="modalRole"></p>
+                <div class="modal-bio" id="modalBio"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- PRENSA -->
     <section id="prensa">
@@ -902,7 +1109,6 @@
         <div class="reveal">
             <p class="section-label">Contacto</p>
             <h2 class="section-title">¿Querés hablar<em>?</em></h2>
-            <p class="section-text">Contrataciones, insultos, invitaciones a café. Todo vale.</p>
             <a href="mailto:contacto@companiaordinaria.com" class="contact-email">contacto@companiaordinaria.com</a>
             <div class="contact-socials">
                 <a href="https://www.instagram.com/companiaordinaria" target="_blank">Instagram</a>
@@ -953,6 +1159,115 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }, 5000);
+
+        // Team modal
+        const teamData = {
+            shumi: {
+                name: 'Shumi Gauto',
+                role: 'Dramaturga · Directora · Actriz',
+                photo: 'public/images/pic_shumi.png',
+                bio: `<p>Shumi Gauto es dramaturga, directora y actriz. Es autora de <em>Expresión revolución</em>, cocreadora del exitoso podcast infantil <em>Cuentos feroces</em>, y directora de artes escénicas en Portal Bosque.</p>
+                      <p>Es autora y directora de <em>Vida y obra del Dr. Lipovetski</em> (Nominada a Mejor Interpretación Femenina, Mejor Libro y Mejor Musical del OFF), <em>Cuentos Feroces la obra</em> (Nominada a los premios ACE Mejor Música y Mejor Coreografía), <em>Embutidos Ibargoyen Varela</em>, y <em>BOY</em> — unipersonal escrita y dirigida por Shumi con la actuación de Boy Olmi.</p>`
+            },
+            joaquin: {
+                name: 'Joaquín Bachrach',
+                role: 'Creador · Productor · Emprendedor cultural',
+                photo: 'public/images/pic_joaco.jpeg',
+                bio: `<p>Joaquín es creador, productor y emprendedor cultural. Es miembro de Compañía Ordinaria, donde participa en el desarrollo creativo de los proyectos y compone la música de los anti-musicales de la compañía.</p>
+                      <p>También es cofundador de <em>Cuentos Feroces</em>, un proyecto de impacto para niños nacido en 2020. Ha trabajado junto a organizaciones como UNICEF, ONU y UNESCO, fue declarado de interés cultural en Argentina y sus historias se escuchan en más de 30.000 escuelas de América Latina.</p>
+                      <p>Su trabajo se enfoca en crear, producir y desarrollar proyectos culturales.</p>`
+            },
+            catalina: {
+                name: 'Catalina Salas',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            lucila_b: {
+                name: 'Lucila Brea',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            allie: {
+                name: 'Allie Kotliar',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            maria: {
+                name: 'María Solari',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            ximena: {
+                name: 'Ximena Perazzo',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            lucila_t: {
+                name: 'Lucila Tolcachier',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            pietro: {
+                name: 'Pietro Scalone',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            },
+            masha: {
+                name: 'Masha Sultanova',
+                role: 'Compañía Ordinaria',
+                photo: null,
+                bio: `<p>Próximamente.</p>`
+            }
+        };
+
+        const modal = document.getElementById('teamModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalName = document.getElementById('modalName');
+        const modalRole = document.getElementById('modalRole');
+        const modalBio = document.getElementById('modalBio');
+        const modalPhoto = document.getElementById('modalPhoto');
+
+        document.querySelectorAll('.team-member[data-member]').forEach(member => {
+            member.addEventListener('click', () => {
+                const key = member.dataset.member;
+                const data = teamData[key];
+                if (!data) return;
+
+                modalName.textContent = data.name;
+                modalRole.textContent = data.role;
+                modalBio.innerHTML = data.bio;
+
+                if (data.photo) {
+                    modalPhoto.innerHTML = `<img src="${data.photo}" alt="${data.name}">`;
+                } else {
+                    const initials = data.name.split(' ').map(w => w[0]).join('');
+                    modalPhoto.innerHTML = `<div class="modal-photo-placeholder">${initials}</div>`;
+                }
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
     </script>
 </body>
 </html>
