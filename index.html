@@ -764,17 +764,71 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .prensa-placeholder {
+        .prensa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
             margin-top: 60px;
-            padding: 60px;
-            border: 1px dashed rgba(184,240,82,0.2);
-            border-radius: 4px;
-            text-align: center;
-            color: var(--mid);
-            font-size: 15px;
         }
 
-        .prensa-placeholder span {
+        .prensa-card {
+            background: linear-gradient(145deg, rgba(26,26,26,0.8), rgba(17,17,17,0.9));
+            border: 1px solid rgba(184,240,82,0.08);
+            border-radius: 4px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .prensa-card:hover {
+            border-color: rgba(184,240,82,0.25);
+            transform: translateY(-4px);
+        }
+
+        .prensa-quote {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--light);
+            flex: 1;
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--lime);
+        }
+
+        .prensa-quote::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--lime);
+            opacity: 0.3;
+            position: absolute;
+            top: -16px;
+            left: -4px;
+            line-height: 1;
+        }
+
+        .prensa-source {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--lime);
+            font-weight: 500;
+        }
+
+        .prensa-read {
+            font-size: 12px;
+            color: var(--mid);
+            margin-top: 6px;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .prensa-card:hover .prensa-read {
             color: var(--lime);
         }
 
@@ -917,6 +971,14 @@
 
             .hero-logo {
                 width: 85vw;
+            }
+
+            .prensa-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prensa-card {
+                padding: 32px 24px;
             }
         }
     </style>
@@ -1099,8 +1161,32 @@
             <p class="section-label">Prensa</p>
             <h2 class="section-title">Lo que <em>dicen.</em></h2>
         </div>
-        <div class="prensa-placeholder reveal">
-            <p>Próximamente: notas, entrevistas y reseñas.<br><span>¿Sos periodista? Escribinos.</span></p>
+        <div class="prensa-grid">
+            <a href="https://enperspectiva.uy/en-perspectiva-radio/hijos-de-punta/hijos-de-punta-shumi-gauto-una-artista-integral-que-combina-sensibilidad-humor-y-profundidad-en-todos-sus-proyectos/" target="_blank" class="prensa-card reveal">
+                <p class="prensa-quote">Shumi Gauto, una artista integral que combina sensibilidad, humor y profundidad en todos sus proyectos</p>
+                <span class="prensa-source">Hijos de Punta</span>
+                <span class="prensa-read">Leer nota →</span>
+            </a>
+            <a href="https://www.portada.com.uy/noticias/cultura/71880/" target="_blank" class="prensa-card reveal">
+                <p class="prensa-quote">"Vida y obra del Dr. Lipovetski" llega a Maldonado</p>
+                <span class="prensa-source">Portada Punta del Este</span>
+                <span class="prensa-read">Leer nota →</span>
+            </a>
+            <a href="https://correopuntadeleste.com/vida-y-obra-del-doctor-lipovetski-en-el-teatro-fernandino/" target="_blank" class="prensa-card reveal">
+                <p class="prensa-quote">Vida y obra del Doctor Lipovetsky en el teatro Fernandino</p>
+                <span class="prensa-source">Correo de Punta del Este</span>
+                <span class="prensa-read">Leer nota →</span>
+            </a>
+            <a href="https://www.lanacion.com.ar/espectaculos/teatro/chicos-shumi-gauto-reversiona-cuentos-tradicionales-nid2394355/" target="_blank" class="prensa-card reveal">
+                <p class="prensa-quote">Shumi Gauto reversiona los cuentos tradicionales</p>
+                <span class="prensa-source">La Nación</span>
+                <span class="prensa-read">Leer nota →</span>
+            </a>
+            <a href="https://www.happimess.co/entre-vista-a-shumi-gauto-un-puente-entre-paises/" target="_blank" class="prensa-card reveal">
+                <p class="prensa-quote">Entrevista a Shumi Gauto: un puente entre países</p>
+                <span class="prensa-source">Happimess</span>
+                <span class="prensa-read">Leer nota →</span>
+            </a>
         </div>
     </section>
 
