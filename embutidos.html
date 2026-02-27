@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embutidos Ibargoyen Varela — Compañía Ordinaria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lime: #b8f052;
+            --lime-dim: #8bc63e;
+            --dark: #1a1a1a;
+            --darker: #111111;
+            --darkest: #0a0a0a;
+            --light: #f0f0e8;
+            --mid: #888;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--darkest);
+            color: var(--light);
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===================== NAV ===================== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 0 40px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(184,240,82,0.08);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            height: 60px;
+            background: rgba(10,10,10,0.95);
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 1.1rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--light);
+            transition: font-size 0.4s ease;
+        }
+
+        .nav-logo em {
+            display: block;
+            font-style: italic;
+            color: var(--lime);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 0.95em;
+        }
+
+        nav.scrolled .nav-logo { font-size: 0.95rem; }
+
+        .nav-back {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-back:hover { color: var(--lime); }
+
+        /* ===================== HERO ===================== */
+        .obra-hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 60px;
+        }
+
+        .obra-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('public/images/embutidos_thumbail.jpeg') center center / cover no-repeat;
+        }
+
+        .obra-hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.2) 30%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.95) 100%),
+                linear-gradient(to right, rgba(10,10,10,0.6) 0%, transparent 60%);
+        }
+
+        .obra-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .obra-hero-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--lime);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .obra-hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--light);
+            margin-bottom: 16px;
+        }
+
+        .obra-hero-subtitle {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--mid);
+        }
+
+        /* ===================== SECTIONS ===================== */
+        .obra-section {
+            padding: 100px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .obra-section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--lime);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .obra-section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 32px;
+            color: var(--light);
+        }
+
+        .obra-section-title em {
+            font-style: italic;
+            color: var(--lime);
+        }
+
+        .obra-text {
+            max-width: 700px;
+            color: rgba(240,240,232,0.7);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .obra-text + .obra-text {
+            margin-top: 20px;
+        }
+
+        /* ===================== GALERÍA ===================== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .galeria-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--dark), #222);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--mid);
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px dashed rgba(184,240,82,0.15);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===================== FICHA TÉCNICA ===================== */
+        .ficha-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px 80px;
+            margin-top: 40px;
+        }
+
+        .ficha-role {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--lime);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .ficha-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--light);
+            line-height: 1.5;
+        }
+
+        /* ===================== AGRADECIMIENTOS ===================== */
+        .agradecimientos-text {
+            max-width: 700px;
+            color: rgba(240,240,232,0.5);
+            font-size: 16px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* ===================== VOLVER ===================== */
+        .volver-section {
+            padding: 80px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .volver-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 1px solid var(--lime);
+            color: var(--lime);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .volver-btn:hover {
+            background: var(--lime);
+            color: var(--darkest);
+        }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            padding: 32px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(240,240,232,0.25);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* ===================== ANIMATIONS ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 900px) {
+            .obra-hero { padding: 80px 24px; min-height: 60vh; }
+            .obra-section { padding: 80px 24px; }
+            .volver-section { padding: 60px 24px; }
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+            .ficha-grid { grid-template-columns: 1fr; gap: 32px; }
+            nav { padding: 0 24px; }
+        }
+
+        @media (max-width: 600px) {
+            .galeria-grid { grid-template-columns: 1fr; }
+            .obra-hero { min-height: 50vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            Compañía<em>Ordinaria</em>
+        </a>
+        <a href="index.html#espectaculos" class="nav-back">← Volver</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="obra-hero">
+        <div class="obra-hero-bg"></div>
+        <div class="obra-hero-content">
+            <p class="obra-hero-label">Obra 02 — 2025</p>
+            <h1 class="obra-hero-title">Embutidos<br>Ibargoyen Varela</h1>
+            <p class="obra-hero-subtitle">Anti musical · Compañía Ordinaria</p>
+        </div>
+    </section>
+
+    <!-- SINOPSIS -->
+    <section class="obra-section reveal">
+        <p class="obra-section-label">Sinopsis</p>
+        <h2 class="obra-section-title">De qué <em>va.</em></h2>
+        <p class="obra-text">Próximamente: sinopsis de la obra.</p>
+        <p class="obra-text">Acá va la descripción completa de "Embutidos Ibargoyen Varela". Podés reemplazar este texto con la sinopsis real cuando la tengas.</p>
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="obra-section reveal">
+        <p class="obra-section-label">Galería</p>
+        <h2 class="obra-section-title">En <em>escena.</em></h2>
+        <div class="galeria-grid">
+            <div class="galeria-item">Foto 1</div>
+            <div class="galeria-item">Foto 2</div>
+            <div class="galeria-item">Foto 3</div>
+            <div class="galeria-item">Foto 4</div>
+            <div class="galeria-item">Foto 5</div>
+            <div class="galeria-item">Foto 6</div>
+        </div>
+    </section>
+
+    <!-- FICHA TÉCNICA -->
+    <section class="obra-section reveal">
+        <p class="obra-section-label">Ficha técnica</p>
+        <h2 class="obra-section-title">Quién hizo <em>qué.</em></h2>
+        <div class="ficha-grid">
+            <div class="ficha-item">
+                <p class="ficha-role">Dirección</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Elenco</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Música</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Vestuario</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Iluminación</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+            <div class="ficha-item">
+                <p class="ficha-role">Escenografía</p>
+                <p class="ficha-name">Próximamente</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGRADECIMIENTOS -->
+    <section class="obra-section reveal">
+        <p class="obra-section-label">Agradecimientos</p>
+        <h2 class="obra-section-title">Gracias <em>a.</em></h2>
+        <p class="agradecimientos-text">Próximamente: agradecimientos de la obra.</p>
+    </section>
+
+    <!-- VOLVER -->
+    <div class="volver-section">
+        <a href="index.html#espectaculos" class="volver-btn">← Ver todos los espectáculos</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2024 — Compañía Ordinaria. Punta del Este, Uruguay.</p>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

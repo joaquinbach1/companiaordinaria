@@ -412,6 +412,33 @@
             opacity: 1;
         }
 
+        .show-card-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 24px;
+            border: 1px solid var(--lime);
+            color: var(--lime);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .show-card:hover .show-card-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.15s;
+        }
+
+        .show-card-btn:hover {
+            background: var(--lime);
+            color: var(--darkest);
+        }
+
         /* ===================== HISTORIA ===================== */
         #historia {
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -721,11 +748,12 @@
     <section id="hero">
         <div class="hero-slideshow">
             <div class="hero-slide active" style="background-image:url('public/images/Hero1.jpg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero2.jpeg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero3.jpeg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero4.jpeg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero5.jpeg')"></div>
-            <div class="hero-slide" style="background-image:url('public/images/Hero6.jpeg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero2.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero3.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero4.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero5.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero6.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('public/images/Hero7.jpg')"></div>
         </div>
         <div class="hero-grain"></div>
         <div class="hero-content">
@@ -766,7 +794,8 @@
                 <div class="show-card-overlay">
                     <span class="show-card-number">Obra 01</span>
                     <h3 class="show-card-title">Vida y obra del doctor Lipovetsky</h3>
-                    <p class="show-card-desc">Sinopsis próximamente. Hacé clic para ver más detalles.</p>
+                    <p class="show-card-desc">Anti musical. Punta del Este, 2024.</p>
+                    <a href="lipo.html" class="show-card-btn">Ver más</a>
                 </div>
             </div>
             <div class="show-card reveal">
@@ -774,7 +803,8 @@
                 <div class="show-card-overlay">
                     <span class="show-card-number">Obra 02</span>
                     <h3 class="show-card-title">Embutidos Ibargoyen Varela</h3>
-                    <p class="show-card-desc">Sinopsis próximamente. Hacé clic para ver más detalles.</p>
+                    <p class="show-card-desc">Anti musical. Punta del Este, 2025.</p>
+                    <a href="embutidos.html" class="show-card-btn">Ver más</a>
                 </div>
             </div>
         </div>
